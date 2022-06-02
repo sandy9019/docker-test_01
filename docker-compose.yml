@@ -1,0 +1,25 @@
+version: '3'
+services:
+    app:
+      container_name: apache
+      image: hello-apache2
+      build:
+        context: .
+        dockerfile: Dockerfile3
+      ports:
+       - "80:80"
+      networks:
+        - net
+    my_db:
+      container_name: mysql-container
+      image: mysql:5.7
+      environment:
+        - MYSQL_ROOT_PASSWORD=12345
+      ports:
+        - "3306:3306"
+      volumes:
+        - "$PWD/data:/var/lib/mysql"
+      networks:
+        - net
+networks:
+   net:
